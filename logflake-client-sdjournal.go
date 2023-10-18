@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
 	"os"
 	"os/signal"
@@ -20,8 +19,6 @@ func main() {
 	r, err := sdjournal.NewJournalReader(sdjournal.JournalReaderConfig{
 		NumFromTail: 1,
 		Formatter: func(entry *sdjournal.JournalEntry) (string, error) {
-			data, _ := json.Marshal(entry)
-			log.Println(string(data))
 			params := map[string]interface{}{}
 			for k, v := range entry.Fields {
 				params[k] = v
